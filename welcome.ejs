@@ -1,0 +1,242 @@
+<!-- myplayer object contains all the info on Player
+    myplayer = {
+        "server": server configured ,
+        connectionStatus,
+        myIpAddress,     //string of IP addresses
+        ethMac,
+        wifiMac,
+        "cpuSerialNumber": player cpu number ,
+        "installation": installation  ,
+        "secret":   group name to which player is registred,
+        "orientation":  display orientation
+        "resolution":  display resolution ,
+        "nwinfo": {
+            "LINK": network status,
+            "DHCP": network status,
+            "PING": network status,
+            "DNS":  network status,
+            "NETSTATUS": network status
+        },
+        "version": player software version,
+        "name": player name,
+        "TZ": time zone to which the player is set
+    },
+    systemIP: Array of IP addresses,
+    playerId
+ -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>VRQUIN-Player Welcome Page</title>
+    <!-- <style>
+        html, body {
+            /*font-size: 32px;*/     /* Change this to change the sizes of all texts*/
+            height: 100%;
+            width: 100%;
+            margin: 0;
+            color: white;
+            font-family: sans-serif, Helvetica, Arial;
+            font-weight: 300;
+            /*overflow: scroll;*/
+
+            /*background: linear-gradient(to bottom, rgba(226,226,226,1) 0%, rgba(219,219,219,1) 100%);*/
+            /*
+                background-image: url("background.png");
+                background-repeat: no-repeat;
+                background-size: cover;
+            */
+        }
+
+        @media (orientation: landscape) {
+            html, body {
+                /* flex-direction: row; */
+                font-size: 2vw;
+                /* font-size: 32px; */
+            }
+        }
+
+        @media (orientation: portrait) {
+            html, body {
+                /* flex-direction: column; */
+                font-size: 2vh;
+            }
+        }
+
+        .offline {
+            background-color: #111111;
+            /*background: linear-gradient(to bottom, rgba(125, 125, 125, 1) 0%, rgba(28, 28, 28, 1) 100%);*/
+        }
+
+        .online {
+            background-color: darkslategray;
+            /*background: linear-gradient(to bottom, rgba(87, 178, 203, 1) 0%, rgba(54, 133, 155, 1) 100%);*/
+        }
+
+        .container {
+            height: 90%;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .title {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+        }
+
+        .message-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .player-id {
+            font-size: 1rem;
+            color: #f0f0f0;
+            text-align: center;
+        }
+
+        .citation {
+            color: orange;
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            font-size: 0.5rem
+        }
+
+        p {
+            color: darkgrey;
+            font-weight: 100;
+            padding: 5px;
+            margin: 0;
+            text-align: center;
+        }
+
+        strong {
+            font-weight: 600;
+            color: white;
+            padding: 5px;
+            margin: 0;
+        }
+    </style> -->
+</head>
+<script></script>
+
+<body <% if(myplayer.myIpAddress){ %>
+    class="online"
+    <% } else { %>
+        class="offline"
+        <% } %>
+            >
+            <div class="container">
+                <!-- <div class="player-id"><span>player ID</span><br><span style="font-size: 2rem;"><%= playerId %></span></div> -->
+                <!-- <div class="title">Welcome</div>
+        <div class="player-id"><span>player ID</span><br><span style="font-size: 2rem;"><%= playerId %></span></div>
+        <div class="message-container">
+            <% if(myplayer.myIpAddress){ %>
+                <p> To connect from browser use
+                    <% for(const row of systemIP) { %>
+                        <strong>http://<%= row.ip %>:8000</strong>
+                    <% } %>
+                </p>
+                <p>
+                    To locally change settings, connect keyboard and press "Ctrl N" OR "F6"
+                </p>
+            <% } else { %>
+                <p style="color: coral">
+                    There seems to be no Network Connection(Ethernet or wifi)
+                </p>
+                <p>
+                    If wifi is not configured already, you can connect to
+                </p>
+                <p>
+                    wifi network <b>piplayer_<%= playerId.slice(-4) %></b>
+                </p>
+                <p>
+                    and use http://192.168.100.1:8000/settings to configure
+                </p>
+                <br />
+                <p>
+                    To locally change settings, connect keyboard and press "Ctrl N" OR "F6"
+                </p>
+            <% } %>
+        </div>
+        <div class="message-container">
+            <p>
+                Registered server:
+                <strong><%= myplayer.server %></strong>
+                Connection status:
+                <strong><%= myplayer.connectionStatus %></strong>
+            </p>
+            <p>Register your player id at <%= myplayer.server %> to manage</p>
+            <p>
+                <% if(myplayer.installation) { %>
+                    account: <strong><%= myplayer.installation %></strong>
+                <% } %>
+                <% if(myplayer.secret) { %>
+                    group: <strong><%= myplayer.secret %></strong>
+                <% } %>
+                <% if(myplayer.version) { %>
+                    version: <strong><%= myplayer.version %></strong>
+                <% } %>
+                <% if(myplayer.name) { %>
+                    name: <strong><%= myplayer.name %></strong>
+                <% } %>
+            </p>
+        </div>
+        <div class="message-container">
+            <p>Player IP addresses:
+                <% for(const row of systemIP) { %>
+                    <strong><%= row.ip %></strong>
+                <% } %>
+            </p>
+            <p>
+                <% if(myplayer.ethMac) { %>
+                    Ethernet MAC: <strong><%= myplayer.ethMac %></strong>
+                <% } %>
+                <% if(myplayer.wifiMac) { %>
+                    wifi MAC: <strong><%= myplayer.wifiMac %></strong>
+                <% } %>
+            </p>
+            <p>
+                Connectivity&nbsp;
+                Link: <strong><%= myplayer.nwinfo.LINK %></strong>,
+                DNS: <strong><%= myplayer.nwinfo.DNS %></strong>,
+                PING: <strong><%= myplayer.nwinfo.PING %></strong>,
+                DHCP: <strong><%= myplayer.nwinfo.DHCP %></strong>
+            </p>
+        </div>
+    </div> -->
+
+                <video autoplay loop muted width="100%" height="100%">
+
+                    <source src="/home/pi/piSignagePro/public/app/img/vrquin.mp4" type="video/mp4">
+                </video>
+
+                <p style="position:fixed; bottom: 0;color:#ffffff; width:100%; text-align:center; padding:20px">Player
+                    ID:<span>
+                        <%= playerId %>
+                    </span><br>
+                    Player IP addresses:
+                    <% for(const row of systemIP) { %>
+                        <strong>
+                            <%= row.ip %>
+                        </strong>
+                        <% } %>
+                </p>
+
+</body>
+</script>
+
+</html>

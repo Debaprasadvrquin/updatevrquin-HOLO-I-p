@@ -1,0 +1,22 @@
+{
+    "lang": "en",
+    "dir": "ltr",
+    "name": "VRQUIN",
+    "short_name": "VRQUIN",
+    "icons": [{
+      "src": "icons/vrquin-64.png",
+      "sizes": "64x64",
+      "type": "image/png"
+    }, {
+      "src": "icons/vrquin-128.png",
+      "sizes": "128x128",
+      "type": "image/png"
+    }],
+    "scope": "/",
+    "id": "/?source=pwa",
+    "start_url": "../view/index-pi-piimage.html",
+    "display": "standalone",
+    "orientation": "landscape",
+    "theme_color": "aliceblue",
+    "background_color": "white"
+  }
