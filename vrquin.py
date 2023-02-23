@@ -6,7 +6,7 @@ def install(which):
     os.system(which)
 
 
-os.chdir('/home/pi/updatevrquin-p')
+os.chdir('/home/pi/updatevrquin-HOLO-I-p')
 directory = os.getcwd()
 
 # for install pathlib in pip
